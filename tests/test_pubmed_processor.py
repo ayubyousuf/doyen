@@ -1,9 +1,11 @@
 import os
 import unittest
 import configparser
+import sys
+sys.path.append("..")
 
-from ftp_downloader import FtpDownloader
-from pubmed_processor import PubmedProcessor
+from ingestion_pipeline.ftp_downloader import FtpDownloader
+from ingestion_pipeline.pubmed_processor import PubmedProcessor
 
 """
 Covers some basic unit tests for the project
@@ -13,8 +15,8 @@ class TestPubMedProcessor(unittest.TestCase):
 
     def setUp(self):        
         # Load config file
-        config = configparser.ConfigParser()
-        config.read('config.ini')
+        config = configparser.ConfigParser()        
+        config.read('../config.ini')
         self.config_dict = {section: dict(config.items(section)) for section in config.sections()}
         
         # Create an instance of FtpDownloader

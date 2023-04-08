@@ -10,7 +10,7 @@ from elasticsearch import Elasticsearch, helpers
 
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('../config.ini')
 
 es = Elasticsearch(
     config.get('elasticsearch', 'host'),
@@ -19,6 +19,8 @@ es = Elasticsearch(
 )
 index_name = config.get('index', 'name')
 type_name = config.get('index', 'type')
+max_retries = int(config.get('elasticsearch', 'max_retries'))
+timeout = config.get('elasticsearch', 'timeout')
 
 class PubmedProcessor:
     """This class is for handling pubmed data processing, extract pubmed data from xml and indexing into elastic search"""
